@@ -1,0 +1,26 @@
+body{
+  background: url(https://cms.qz.com/wp-content/uploads/2018/08/gandalf-lord-of-the-rings-e1534255368438.jpg);
+
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+div{
+  background: blue;
+  border-color: red;
+  border-width: 4px;
+  border-style: double;
+}
+
+/* for both inside and outside div */
+/*  */
+p{
+  color: yellow;
+}
+
+span{
+  background: red;
+  color: black;
+
+}

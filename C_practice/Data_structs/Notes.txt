@@ -1,0 +1,724 @@
+Arrays:
+
+-collection of similar data items under name
+
+    example code:
+
+        int main(c)
+        {
+            //declares empty array
+            //
+            int A[5]; 
+            //declare and initialize
+            //
+            int B[5] = {1, 2, 3, 4, 5}; 
+
+            //how to access arrays
+            //
+            for(i=0, i<5, i++)
+            {
+              printf("%d", B[i]);
+
+            }
+
+
+        //end of script
+        //
+        }
+
+Structures:
+-storing information in one area
+
+    examples:
+        1. complex number (4 bytes)
+            -a +i*b
+            struct Complex
+            {
+                int real;
+                int img;
+
+                }
+        2. student
+            struct Student (77 bytes)
+            {
+                int roll;
+                char name[35];
+                char dept[10];
+                char addr[50];
+            }
+            ...
+            ...
+            struct Student s;
+            s.roll = 10;
+            s.name = "John";
+            ...
+                
+                
+        3. playing cards
+            face: 1, 2, ...10, j, q, k
+            shapes: heart = 3, diamonds = 2, spade = 1, club = 0
+            color: 0 = black, 1 = red
+            
+            struct Card
+            {
+                int face; //2 bytes
+                int shape; //2 bytes
+                int color; //2 bytes
+
+            }
+            
+            int main()
+            {
+                struct Card c;
+                c.face = 1;
+                c.shape = 0;
+                c.color = 0;        
+            }
+
+            OR
+            
+            struct Card c= [1,0,0];
+            ..........................
+                
+            //52 * 6 bytes = 312 bytes
+            //
+            struct Card deck[52] = {{1,0,0}, {2,0,0}...{1,1,0}, {2,1,0}....}
+
+            printf("%d", Deck[0].face);
+            printf("%d", Deck[0].shape);
+            
+
+    example code:
+
+        struct Rectangle
+        {
+            //assume 2 bytes
+            //
+            int length;
+            //assume 2bytes
+            //
+            int breadth; //height
+            //4 bytes total
+            //when using it will take 4 bytes memory
+            //
+
+
+        };
+
+        int main()
+        {
+            //declaration of structure
+            //4 bytes memory reserved
+            //
+            struct Rectangle r;  
+
+            //declare and initialize
+            //
+            struct Rectangle r={10,5}
+
+            //accessing and modifying
+            //use dot notation
+            //
+            r.length = 15;
+            r.breadth = 10;
+            printf("Area of Rectangle is %d",r.length*r.breadth);
+
+        }
+
+Pointer:
+    -address variable
+    -"doesn't store data itself"
+    -used for accessing heap memory and resources
+    -used for parameter passing
+
+    example code:
+        //data variable 
+        //
+        //2 bytes 
+        //address = 200/201
+        //
+        int a=10;
+
+        //address variable
+        //2 bytes
+        //address = 210/211
+        //
+        int *p;
+
+        //stores address of a inside space of p
+        // [200/201] --> [210/211]
+        //
+        p = &a;
+
+        printf("%d", a);
+            ^
+            |
+            |
+        printf("%d", *p);
+
+        //HEAP MEMORY
+        //
+        #include <stdlib.h>
+        int main()
+        {
+            int *p;
+            //C programming
+            //preallocate memory in heap
+            //5 int's of 5
+            //with size of int
+            //
+            p=(int *)malloc(5*sizeof(int));
+
+
+            //C++
+            P = new int[5];
+
+
+
+        //EOF
+        //
+        }
+
+
+Reference:
+    -only available in C++
+    -nickname of variable
+    -useful in parameter passing
+    -writing small functions to use references instead of pointers
+
+
+    example code:
+
+        int main()
+        {
+            int a = 10;
+
+            //reference and assignment
+            //adds name to a
+            //same address
+            //
+            int &r = a;
+
+            cout<<a; //10
+            r++;
+            cout<<r; //11
+            cout<<a; //11
+        }
+
+Pointer to Structure:
+
+    example code:
+        //4 bytes
+        //
+        struct Rectangle
+        {
+            int length;
+            int breadth;
+
+
+        };
+
+        int main()
+        {
+            struct Rectangle r={10,5};
+            //struct pointer to r
+            //takes 2 bytes
+            //
+            struct Rectangle *p = &r;
+
+            r.length = 15;
+
+            //longhand
+            //
+            (*p).length = 20;
+            //shorthand
+            //
+            p->length = 20;
+
+            //DYNAMICALLY
+            //
+
+            struct Rectangle *p;
+
+            //store in heap
+            //need to type cast since mall returns void
+            //
+            P = (struct Rectangle(*)malloc(sizeof(struct Rectangle)));
+            P->length = 10;
+            P-> breadth=5;
+
+
+        }
+
+Function:
+    -piece of code that performs specific task
+    -monolithic vs modular
+    -better for reusability
+    -variables are local by default
+
+    example code:
+
+        Modular / Procedural PROGRAMMING
+            funct1 ()
+            {}
+            funct2 ()
+            {}
+
+            int main()
+            {
+                funct1();
+                funct2();
+            }
+
+        //prototype or header of function / definition
+        //takes formal paramters a and b
+        //
+        int add(int a, int, b)
+            //decimation of function
+            //
+        {
+            int c;
+            c = a+b;
+            return(c);
+        }
+
+        int main()
+        {
+            int x, y , z;
+            x = 10;
+            y = 5;
+            
+            //calling function
+            //x and y are actual paramters
+            //
+            z = add(x, y);
+            printf("sum is %d", z);
+        }
+
+
+Parameter Passing Methods:
+
+    example code:
+        
+        //variables copied into formal parameters
+        //swap only done locally in function
+        //
+        void swap(int x, int y)
+        {
+            int temp;
+            temp = x;
+            x = y;
+            y = temp;
+
+        }
+
+        int main()
+        {
+            int a, b;
+            a = 10;
+            b = 20;
+            
+            //parameter passing into function
+            //doesn't actually swap in main
+            //"pass by value"
+            //
+            swap(a, b);
+            printf("%d %d", a, b);
+
+        }
+
+    //call by ___ <-assistant?(can't make out with accent)
+    //call by address (uses pointers)
+    //
+        //these are pointers now
+        //because addresses are pointed in
+        void swap(int *x, *int y)
+        {
+            int temp;
+            //asteriks dereference
+            //to get value
+            //
+            temp = *x;
+            *x = *y;
+            *y = temp;
+
+        }
+
+        int main()
+        {
+            int a, b;
+            a = 10;
+            b = 20;
+            
+            //parameter address passing into function 
+            //
+            swap(&a, &b);
+            printf("%d %d", a, b);
+
+        }
+
+
+    //call by reference
+    //only in C++
+    //machine code is monolithic
+    //use for small function not heavy function
+    //use carefully
+    //
+        //add & to variable name
+        //
+        void swap(int &x, int &y)
+        {
+            int temp;
+            temp = x; //x is variable a
+                x = y;
+            y = temp;
+
+        }
+
+        int main()
+        {
+            int a, b;
+            a = 10;
+            b = 20;
+            
+            //a is now x, and b is now y
+            //aliases are given
+            //
+            swap(a, b);
+            printf("%d %d", a, b);
+
+        }
+
+Arrays as Parameters:
+
+    example code:
+        //doesn't know size of array so pass size in as n
+        //A is pointer to an array
+        //A can also be written A[] just for array
+        //*A allows for pointer to array or int
+        //n called by value
+        //
+        void fun(int *A, int n)
+        {
+            int i;
+            //prints elements of array
+            //
+            for(i=0, i<n, i++)
+                print("%d", A[i]);
+            
+            //will change array in main
+            //
+            A[0] = 25;
+
+        }
+
+        int main()
+        {
+            int A[5] = {1, 2, 3, 4, 5};
+            fun(A,5);
+
+        }
+
+        "RETURN ARRAY"
+            // [] resembles array so return array
+            // * returns pointer or element or array of elements
+            // int * fun(int n)
+            //
+            int [] fun(int n)
+            {
+                int *p;
+                P=(int *)malloc(n*sizeof(int));
+                return(P);
+
+             }
+
+            int main()
+            {
+                int *A;
+                A=fun(5);
+
+            }
+
+Structure as Parameter:
+
+    example code:
+        //seperate object will be created but copied over
+        //call to value
+        //does not change actual
+        int area(struct Rectangle r1)
+        {
+            return r1.length*r1.breadth;
+        
+        }
+        
+        int main()
+        {
+        
+            struct Rectangle = r{10,5};
+            area(r);
+            printf("%d",area(r));
+        }
+
+        //call by reference
+        //ad & to r1
+        //
+        int area(struct Rectangle &r1)
+        {
+            r1.length++;
+            return r1.length*r1.breadth;
+        
+        }
+        
+        int main()
+        {
+        
+            struct Rectangle = r{10,5};
+            area(r);
+            printf("%d",area(r));
+        }
+        
+        //call by assistant / address
+        //
+        void changeLength(structure *p, int l)
+        {
+            p->length = l;
+            
+        
+        }
+        
+        int main()
+        {
+        
+            struct Rectangle = r{10,5};
+            area(r);
+            changeLength(&r, 20);
+        }
+    
+
+Structures and Functions:
+
+    example code:
+
+        struct Rectangle:
+        {
+            int length;
+            int breadth;
+
+        };
+
+        void initialize(struct Rectangle *r, int l, int b)
+        {
+            r->length = l;
+            r->breadth = b;
+
+        }
+
+        int area(struct Rectangle r)
+        {
+            return r.length *r.breadth;
+
+        }
+
+
+        void changeLength(struct Rectangle *r, int l)
+        {
+            r->length = l;
+
+
+        }
+
+        int main()
+        {
+            struct Rectangle r;
+            //all just functions in main
+            //functions should reference r
+            intialize(&r, 10,5);
+
+            //not changing array so just pass in values
+            //
+            area(r);
+
+            changeLength(&r,20);
+        }
+
+
+Converting a C program to a C++ Class:
+
+    example code from before altered:
+
+        class Rectangle:
+        {
+            private:
+                int length;
+                int breadth;
+    
+            public:
+                //void initialize(int l, int b)
+            
+                //constructor
+                //creates and initializes
+                //
+                Rectangle(int l, int b)
+                {
+                    length = l;
+                    breadth = b;
+                }
+
+            
+                int area()
+                {
+                    return length *breadth;
+                }
+
+                void changeLength(int l)
+                {
+                    length = l;
+                }
+        };
+
+        //
+        //
+        int main()
+        {
+            //object direct initalization
+            //
+            Rectangle r(10, 5);
+            
+            //no longer needed
+            //
+            //r.intialize(10,5);
+
+            r.area();
+
+            r.changeLength(20);
+        }        
+        
+C++ Class and Constructor:
+
+
+example Code:
+    #include<iostream>
+    //so you can use cin cout
+    //
+    using namespace std;
+    
+    class Rectangle
+    {
+        private:
+            int lenghth;
+            int breadth;
+        
+        public:
+            //default constructor
+            //
+            Rectangle(){length = breadth = 1;}
+            
+            //constructor overloading
+            //header of function
+            //
+            Rectangle(int l, int b);
+            int area();
+            int perimeter();
+            int getLength(){return length;}
+            void setLength(int l){length = l;}
+            //if dynamic memory
+            //create destructor to release memory
+            //
+            ~Rectangle();
+    };
+
+    // : used for scope
+    //
+    Rectangle::Rectangle(int l, int b)
+    {
+        length = l;
+        breadth = b;
+        
+    }
+
+    int Rectangle::area()
+    {
+        return length*breadth;        
+        
+    }
+
+    int Rectangle::Perimeter()
+    {
+        return 2*length*breadth;
+        
+    }
+
+    //no need to use
+    //but would be automatically called
+    //
+    Rectangle::~Rectangle()
+    {
+    }
+
+    int main()
+    {
+        Rectangle r(10,5);
+        cout<<r.area();
+        cout<<r.perimeter();
+        r.setLength(20);
+        cout<<r.getLength();
+    }
+    
+
+Template Classes:
+-//generic class that can take in all types of data
+    example code:
+
+        //generic data type
+        //
+        template<class T>
+        class Arithametic
+        {
+            private:
+                T a;
+                T b;
+            public:
+            Arithmetic(T a, T b);
+            T add();
+            T sub();
+        };
+
+        template<class T>
+        Arithametic<T>::Arithametic(T a, T b)
+        {
+            this->a=a;
+            this->b=b;
+        }
+
+        template<class T>
+        T Arithametic<T>::add()
+        {
+            T c;
+            c = a + b;
+            return c;            
+        }
+        
+        template<class T>
+        T Arithametic<T>::sub()
+        {
+            T c;
+            c = a-b;
+            return c;
+            
+        }
+
+
+        int main()
+        {
+            //<int> all becomes int
+            //
+            Arithematic<int> ar(10,5);
+            cout<<ar.add();
+            
+            Arithematic<float>ar(1.5,1.2);
+            cout<<arr.add();
+            
+            
+        }
+
+
