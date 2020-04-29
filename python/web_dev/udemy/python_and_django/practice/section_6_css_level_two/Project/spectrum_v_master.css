@@ -1,0 +1,47 @@
+h1{
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+}
+
+.boxes_space{
+  display:flex;
+  padding-left: 60px;
+  padding-right: 60px;
+
+}
+
+.box{
+  width: 20%;
+  height: 260px;
+  margin:2px;
+
+}
+
+#one{
+  background-color: #247BA0;
+
+
+}
+
+#two{
+  background-color: #70C1B3;
+
+}
+
+#three{
+  background-color: #B2DBBF;
+}
+
+#four{
+  background-color: #F3FFBD;
+}
+
+#five{
+  background-color: #FF1654;
+}
+
+
+td{
+  height:200px;
+  width: 100px;
+}

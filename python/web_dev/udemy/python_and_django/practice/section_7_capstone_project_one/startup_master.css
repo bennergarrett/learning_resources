@@ -1,0 +1,46 @@
+body{
+  color:white;
+  background-color: #70C1B3;
+  padding: 30px;
+  text-align: center;
+  border:40px solid #247BA0;
+  border-top:0;
+  margin:0;
+  font-size: 1em;
+}
+h1{
+  font-family: 'Roboto', sans-serif;
+}
+
+.header{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.page_body{
+  padding: 60px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.group_input{
+  padding:5px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+input{
+  width:40%;
+}
+
+form{
+  font-size: 1.5em;
+}
+
+#submit_button{
+  font-size: 1em;
+  text-align: center;
+  width:25%;
+  background-color: #FFE066;
+  height:50px;
+  border-radius: 25px;
+}
