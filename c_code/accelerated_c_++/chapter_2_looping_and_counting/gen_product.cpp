@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
+using std::cin; using std::cout;
+using std::string; using std::endl;
 
 int main(){
     const int prod_max = 10;
