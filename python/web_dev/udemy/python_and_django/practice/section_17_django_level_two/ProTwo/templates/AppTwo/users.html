@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App Two Users</title>
+    <link rel="stylesheet" href="{% static  "css/mystyle.css"%}">
+</head>
+
+<body>
+    <h1>All users shown here:</h1>
+
+    <div>
+        {% comment %} if dict exists {% endcomment %}
+        {% comment %}  {% endcomment %}
+        {% if people %}
+                
+                <ol>
+                    {% for person in people %}
+                    <li>User Info</li>
+                    <ul>
+                        <li>First Name: {{person.first_name}}</li>
+                        <li>Last Name: {{person.last_name}}</li>
+                        <li>Email: {{person.email}}</li>
+                    </ul>
+                    {% endfor %}
+                </ol>
+                
+
+        {% else %}
+            <p>NO RECORDS FOUND</p>
+        
+        {% endif %}
+
+    </div>
+    
+</body>
+</html>
