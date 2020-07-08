@@ -38,6 +38,7 @@ class PostDetailView(DetailView):
     model = Post
     
 
+
 ##use decorator to limit who can alter this
 ##use mixin instead
 ##

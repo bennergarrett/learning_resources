@@ -14,7 +14,7 @@ User = get_user_model()
 
 # Create your views here.
 class PostList(SelectRelatedMixin, generic.ListView):
-    model = model.Post
+    model = models.Post
     select_related = ('user', 'group')
     
 class UserPosts(generic.ListView):
@@ -43,7 +43,7 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user__useranme__iexact=self.kwargs.get('username'))
+        return queryset.filter(user__username__iexact=self.kwargs.get('username'))
     
     
 class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
@@ -57,9 +57,9 @@ class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
         return super().form_valid(form)
     
 class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
-    model = model.Post
+    model = models.Post
     select_related = ('user', 'group')
-    success_url = reverse_lazy('post:all')
+    success_url = reverse_lazy('posts:all')
     
     def get_queryset(self):
         queryset = super().get_queryset()
