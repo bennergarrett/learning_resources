@@ -1,0 +1,98 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  resume_backend
+
+  Sample SAM Template for resume_backend
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Runtime: python3.8 # language used at runtime
+    Timeout: 180 # timeout for a given lambda function execution
+    Environment:
+        Variables: # these will be important later
+            DYNAMO_TABLE: !Ref DynamoVisitorTable
+            DB_ENDPOINT: http://dynamodb.us-east-1.amazonaws.com
+            REGION_NAME: us-east-1
+  Api:
+      Cors:
+        AllowOrigin: "'*'"
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+
+
+Resources:
+
+  DynamoVisitorTable:
+    Type: AWS::DynamoDB::Table #AWS::Serverless::SimpleTable # if you want to define a more complex table, use AWS::DynamoDB::Table
+    # TableName: websiteVisitorTable
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: webPage
+          AttributeType: S
+
+
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      KeySchema:
+        - AttributeName: webPage
+          KeyType: HASH
+
+      # Set the capacity to auto-scale
+      # BillingMode: PAY_PER_REQUEST
+
+
+  VisitorCountFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: visitorCount/
+      Handler: app.lambda_handler
+      Policies: AmazonDynamoDBFullAccess # default IAM policy 
+      Runtime: python3.8
+      Events:
+        API:
+          Type: Api
+          Properties:
+            # RestApiId: !Ref ServerlessApi
+            Path: /{proxy+}
+            Method: GET
+
+
+  # ServerlessApi:
+  #   Type: AWS::Serverless::Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+  #   Properties:
+  #     # Path: /visitorCount
+  #     # Method: GET
+  #     StageName: Prod
+  #     EndpointConfiguration: REGIONAL
+  #     Cors: 
+  #       AllowOrigin: "'*'"
+  #       AllowMethods: "'*'"
+  #       AllowHeaders: "'*'"
+  #     # GatewayResponses:
+  #     #   Headers:
+  #     #     Access-Control-Allow-Origin: "'*'"
+
+# Outputs:
+#   ApiUrl:
+#     Description: The target URL of the created API
+#     Value: !Sub "https://${ServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+#     Export:
+#       Name: ApiUrl
+
+
+# Outputs:
+#   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+#   # Find out more about other implicit resources you can reference within SAM
+#   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+#   HelloWorldApi:
+#     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+#     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+#   HelloWorldFunction:
+#     Description: "Hello World Lambda Function ARN"
+#     Value: !GetAtt HelloWorldFunction.Arn
+#   HelloWorldFunctionIamRole:
+#     Description: "Implicit IAM Role created for Hello World function"
+#     Value: !GetAtt HelloWorldFunctionRole.Arn
